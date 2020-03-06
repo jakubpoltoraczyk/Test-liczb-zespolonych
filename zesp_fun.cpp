@@ -1,6 +1,10 @@
 #include "zesp.h"
 
-Liczba::Liczba(const double & r, const double & i) : real(r), img(i) {}
+Liczba Liczba::operator~(void)
+{
+    img=-img;
+    return(*this);
+}
 
 Liczba Liczba::operator+(const Liczba & l)const
 {
@@ -26,6 +30,16 @@ Liczba Liczba::operator*(const Liczba & l)const
     return(obiekt);
 }
 
+Liczba Liczba::operator/(Liczba l)const
+{
+    Liczba obiekt;
+    obiekt=*this*~l;
+    double dzielnik=pow(l.real,2)+pow(l.img,2);
+    obiekt.real/=dzielnik;
+    obiekt.img/=dzielnik;
+    return(obiekt);
+}
+
 bool Liczba::operator==(const Liczba & l)const
 {
     if(real==l.real&&img==l.img)
@@ -46,8 +60,11 @@ std::ostream & operator<<(std::ostream & o,const Liczba & l)
 std::istream & operator >> (std::istream & i, Liczba & l)
 {
     double re,im;
-    while(i.peek()=='\n'||i.peek()==' '||i.peek()=='\t')
+    char znak;
+    while(i.peek()=='\n'||i.peek()==' ')
         i.get();
+    if(i.peek()=='~')
+        i.get(znak);
     if(i.get()!='(')
         i.setstate(std::ios::failbit);
     i >> re;
@@ -56,10 +73,14 @@ std::istream & operator >> (std::istream & i, Liczba & l)
         i.setstate(std::ios::failbit);
     if(i.get()!=')')
         i.setstate(std::ios::failbit);
-    i.get();
+    if(i.peek()=='\n'||i.peek()==' ')
+        i.get();
     if(!i.fail())
     {
-        l=Liczba(re,im);
+        if(znak=='~')
+            l=Liczba(re,-im);
+        else
+            l=Liczba(re,im);
     }
     return(i);
 }

@@ -31,12 +31,14 @@ int main(int argc, char *argv[])
                 result=one-two; break;
                 case '*':
                 result=one*two; break;
+                case '/':
+                result=one/two; break;
             }
             cout << ":? Podaj wynik operacji: ";
             cout << one << " " << znak << " " << two << endl;
             cout << "   Twoja odpowiedz: ";
             cin >> answer;
-            while(cin.fail())
+            for(int n=0;cin.fail()&&n<2;++n)
             {
                 cin.clear();
                 cin.ignore(10000,'\n');
@@ -64,6 +66,7 @@ int main(int argc, char *argv[])
     cout << "Koniec testu" << endl << endl;
     cout << "Ilosc dobrych odpowiedzi: " << poprawne << endl;
     cout << "Ilosc blednych odpowiedzi: " << razem << endl;
-    cout << "Wynik procentowy poprawnych odpowiedzi : " << (poprawne/razem)*100 << endl;
+    cout << "Wynik procentowy poprawnych odpowiedzi : " << (poprawne/razem)*100 << "%" << endl;
+    plik.close();
     return(0);
 }
