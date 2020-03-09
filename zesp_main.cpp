@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "zesp.h" // dolacznie klasy Liczba oraz funkcji sprawdzajacych poprawnosc argumentow wywolania programu
+#include "zesp_fun.h" // dolaczenie klasy Liczba oraz funkcji z nia zwiazanych
+#include "zesp_other.h" // dolaczenie klasy Statystyka oraz funkcji i elementow zwiazanych z obsluga programu
 
 int main(int argc, char *argv[])
 {   
@@ -9,23 +10,23 @@ int main(int argc, char *argv[])
     using std::cin;
     std::ifstream plik;
     Liczba one,two,answer,result; // stworzenie potrzebnych obiektow klasy Liczba
-    char znak; // zmienna do przechowywania znaku operacji do wykonania
-    double razem=0,poprawne=0; // zmienne do przechowywnia statystyk odpowiedzi  
+    Statystyka dane;
+    Operator znak; // zmienna do przechowywania znaku operacji do wykonania
     sprawdzenie_argumentow(argc,argv,plik); // sprawdzenie poprawnosci argumentow wywolania programu oraz poprawnosci pliku
-    while (plik.peek()!=EOF) // jesli nie jest ustawiona flaga bledu
+    while (plik.peek()!=EOF) // jesli nie wykryto znaku konca pliku
     {
         plik >> one >> znak >> two; // wczytanie dwoch liczb i znaku operacji
         if(!plik.fail()) // jesli nie wykryto flagi bledu
         {
             switch(znak) // rozpozanie znaku operacji do wykonania
             {
-                case '+': // dodawanie
+                case plus: // dodawanie
                 result=one+two; break; // przypisanie wyniku do obiektu result
-                case '-': // odejmowanie
+                case minus: // odejmowanie
                 result=one-two; break; // przypisanie wyniku do obiektu result
-                case '*': // mnozenie
+                case mnoz: // mnozenie
                 result=one*two; break; // przypisanie wyniku do obiektu result
-                case '/': // dzielenie
+                case dziel: // dzielenie
                 result=one/two; break; // przypisanie wyniku do obiektu result
             }
             cout << ":? Podaj wynik operacji: ";
@@ -43,12 +44,12 @@ int main(int argc, char *argv[])
             if(answer==result) // jesli odpowiedz jest poprawna
             {
                 cout << ":) Odpowiedz poprawna" << endl;
-                poprawne++; // zaktualizowanie licznika poprawnych odpowiedzi
+                dane.dodaj_pop(); // zaktualizowanie licznika poprawnych odpowiedzi
             }
-            else // jesli odpowiedz jesy bledna
+            else // jesli odpowiedz jest bledna
                 cout << ":( Blad. Prawidlowym wynikiem jest: " << result << endl;
             cout << endl;
-            razem++; // zaktualizowanie liczby wszystkich odpowiedzi
+            dane.dodaj_suma(); // zaktualizowanie liczby wszystkich odpowiedzi
         }
         else // jesli wykryto flage bledu
         {
@@ -58,9 +59,9 @@ int main(int argc, char *argv[])
         }
     }
     cout << "Koniec testu" << endl << endl;
-    cout << "Ilosc dobrych odpowiedzi: " << poprawne << endl;
-    cout << "Ilosc blednych odpowiedzi: " << razem << endl; 
-    cout << "Wynik procentowy poprawnych odpowiedzi : " << (poprawne/razem)*100 << "%" << endl; // procentowy wynik poprawnosci odpowiedzi
+    cout << "Ilosc dobrych odpowiedzi: " << dane.get_pop() << endl;
+    cout << "Ilosc blednych odpowiedzi: " << dane.get_zle() << endl; 
+    cout << "Wynik procentowy poprawnych odpowiedzi : " << dane.get_procent() << "%" << endl; 
     plik.close(); // zamkniecie pliku
     return(0);
 }
