@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     while (plik.peek()!=EOF) // jesli nie wykryto znaku konca pliku
     {
         plik >> one >> znak >> two; // wczytanie dwoch liczb i znaku operacji
+        plik.get();
         if(!plik.fail()) // jesli nie wykryto flagi bledu
         {
             switch(znak) // rozpozanie znaku operacji do wykonania
