@@ -51,7 +51,7 @@ bool Liczba::operator==(const Liczba & l)const
         return(false); // zwrocenie falszu jesli rozne
 }
 
-/* Metoda przeciazajaca operator << dla liczby zepsolonej */
+/* Metoda przeciazajaca operator << dla liczby zespolonej */
 std::ostream & operator<<(std::ostream & o,const Liczba & l)
 {
     o << "(" << l.get_real() << std::showpos << l.get_img() << std::noshowpos << "i)"; // wypisanie liczby zespolonej

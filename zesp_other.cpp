@@ -3,17 +3,8 @@
 /* Funkcja przeciazajaca operator << dla typu wyliczeniowego Operator */
 std::ostream & operator << (std::ostream & o, const Operator & op)
 {
-    switch(op) // wybor rodzaju znaku do wyswietlenia
-    {
-        case plus:
-        o << "+"; break;
-        case minus:
-        o << "-"; break;
-        case mnoz:
-        o << "*"; break;
-        case dziel:
-        o << "/"; break;
-    }
+    const char tab[]={'+','-','/','*'}; // tablica poszczegolnych znakow
+    o << tab[op];
     return(o); // zwrocenie obiektu klasy ostream
 }
 
