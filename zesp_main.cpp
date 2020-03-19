@@ -64,5 +64,5 @@ int main(int argc, char *argv[])
     cout << "Ilosc blednych odpowiedzi: " << dane.get_zle() << endl; 
     cout << "Wynik procentowy poprawnych odpowiedzi : " << dane.get_procent() << "%" << endl; 
     plik.close(); // zamkniecie pliku
-    return(0);
+    return 0;
 }
