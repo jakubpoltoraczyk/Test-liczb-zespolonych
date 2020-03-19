@@ -12,13 +12,13 @@ private:
     int pop; // skladowa do przechowywania poprawnych odpowiedzi
     int suma; // skladowa do przechowywania lacznej liczby pytan
 public:
-    Statystyka(void): pop(0), suma(0) {} // konstruktor ustawiajacy skladowe prywatne na zera
-    void dodaj_pop(void){pop++;} // metoda aktualizujaca liczbe poprawnych odpowiedzi
-    void dodaj_suma(void){suma++;} // metoda aktualizujaca liczbe wszystkich pytan
-    const int & get_pop(void)const{return(pop);} // metoda zwracajaca liczbe poprawnych odpowiedzi
-    const int & get_suma(void)const{return(suma);} // metoda zwracajaca liczbe wszystkich pytan
-    const int get_zle(void)const{return(suma-pop);} // metoda zwracajaca liczbe niepoprawnych odpowiedzi
-    const double get_procent(void)const{return((double(pop)/double(suma))*100);} // metoda zwracajaca procentowa poprawnosc odpowiedzi
+    Statystyka(): pop(0), suma(0) {} // konstruktor ustawiajacy skladowe prywatne na zera
+    void dodaj_pop(){++pop;} // metoda aktualizujaca liczbe poprawnych odpowiedzi
+    void dodaj_suma(){++suma;} // metoda aktualizujaca liczbe wszystkich pytan
+    const int & get_pop()const{return pop;} // metoda zwracajaca liczbe poprawnych odpowiedzi
+    const int & get_suma()const{return suma;} // metoda zwracajaca liczbe wszystkich pytan
+    const int get_zle()const{return suma-pop;} // metoda zwracajaca liczbe niepoprawnych odpowiedzi
+    double get_procent()const{return (double(pop)/double(suma))*100;} // metoda zwracajaca procentowa poprawnosc odpowiedzi
 };  
 
 /* Typ wyliczeniowy dla rodzaju operacji do wykonania */

@@ -4,28 +4,28 @@
 Liczba Liczba::operator~(void)const
 {
     Liczba obiekt(real,-img);
-    return(obiekt);
+    return obiekt;
 }
 
 /* Metoda dodajaca dwie liczby zespolone */
 Liczba Liczba::operator+(const Liczba & l)const
 {
     Liczba obiekt(real+l.real,img+l.img); // stworzenie nowego obiektu za pomoca konstruktora
-    return(obiekt); // zwrocenie nowego obiektu
+    return obiekt; // zwrocenie nowego obiektu
 }
 
 /* Metoda odejmujaca od siebie dwie iczby zespolone */
 Liczba Liczba::operator-(const Liczba & l)const
 {
     Liczba obiekt(real-l.real,img-l.img); // stworzenie nowego obiektu za pomoca konstruktora
-    return(obiekt); // zwrocenie nowego obiektu
+    return obiekt; // zwrocenie nowego obiektu
 }
 
 /* Metoda mnozaca dwie liczby zepsolone */
 Liczba Liczba::operator*(const Liczba & l)const
 {
     Liczba obiekt(real*l.real-img*l.img,real*l.img+img*l.real); // stworzenie nowego obiektu za pomoca konstruktora
-    return(obiekt); // zwrocenie nowego obiektu
+    return obiekt; // zwrocenie nowego obiektu
 }
 
 /* Metoda dzielaca dwie liczby zepsolone */
@@ -33,29 +33,29 @@ Liczba Liczba::operator/(const Liczba & l)const
 {
     Liczba obiekt=*this*~l;
     obiekt=obiekt/l.get_modul();
-    return(obiekt); //zwrocenie nowego obiektu
+    return obiekt; //zwrocenie nowego obiektu
 }
 
 /* Metoda dzielaca liczbe zepsolona przez liczbe typu double */
 Liczba Liczba::operator/(const double & n)const
 {
     Liczba obiekt(real/n,img/n);
-    return(obiekt);
+    return obiekt;
 }
 /* Metoda porownujaca ze soba rownosc dwoch liczb zespolone */
 bool Liczba::operator==(const Liczba & l)const
 {
     if(real==l.real&&img==l.img) // porownanie obu skladowych(czy sa rowne)
-        return(true); // zwrocenie prawdy jesli rowne
+        return true; // zwrocenie prawdy jesli rowne
     else
-        return(false); // zwrocenie falszu jesli rozne
+        return false; // zwrocenie falszu jesli rozne
 }
 
 /* Metoda przeciazajaca operator << dla liczby zespolonej */
 std::ostream & operator<<(std::ostream & o,const Liczba & l)
 {
     o << "(" << l.get_real() << std::showpos << l.get_img() << std::noshowpos << "i)"; // wypisanie liczby zespolonej
-    return(o); // zwrocenie obiektu klasy ostream
+    return o; // zwrocenie obiektu klasy ostream
 }
 
 /* Metoda przeciazajaca operator >> dla liczby zespolonej i sprawdzajca poprawnosc jej zapisu */
@@ -82,5 +82,5 @@ std::istream & operator >> (std::istream & i, Liczba & l)
         else // bez sprzezenia
             l=Liczba(re,im); //stworzenie liczby za pomoca konstruktora
     }
-    return(i); // zwrocenie obiektu klasy istream
+    return i; // zwrocenie obiektu klasy istream
 }

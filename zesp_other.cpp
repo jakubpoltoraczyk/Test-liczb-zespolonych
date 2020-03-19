@@ -5,7 +5,7 @@ std::ostream & operator << (std::ostream & o, const Operator & op)
 {
     const char tab[]={'+','-','/','*'}; // tablica poszczegolnych znakow
     o << tab[op];
-    return(o); // zwrocenie obiektu klasy ostream
+    return o; // zwrocenie obiektu klasy ostream
 }
 
 /* Funkcja przeciazajaca operator >> dla typu wyliczeniowego Operator */
@@ -28,7 +28,7 @@ std::istream & operator >> (std::istream & i, Operator & op)
         default: 
         i.setstate(std::ios::failbit); // ustawienie flagi bledu
     }
-    return(i); // zwrocenie obiektu klasy istream
+    return i; // zwrocenie obiektu klasy istream
 }
 
 /* Funkcja sprawdzajaca poprawnosc argumentow wywolania programu oraz poprawnosc pliku*/

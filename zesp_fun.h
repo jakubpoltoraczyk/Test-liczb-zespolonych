@@ -11,9 +11,9 @@ private: // prywatne dwie skladowe: czesc rzeczywista i czesc urojona
     double img;
 public:
     Liczba(const double & r=0.0, const double & i=0.0): real(r), img(i) {} // konstruktor przyjumjacy czesc rzeczywista i zespolona
-    const double & get_real(void)const{return(real);} // metoda zwracajaca czesc rzeczywista
-    const double & get_img(void)const{return(img);} // metoda zwracajaca czesc urojona
-    const double get_modul()const{return(real*real+img*img);} // metoda zwracajaca modul liczby zespolonej
+    const double & get_real(void)const{return real;} // metoda zwracajaca czesc rzeczywista
+    const double & get_img(void)const{return img;} // metoda zwracajaca czesc urojona
+    const double get_modul()const{return real*real+img*img;} // metoda zwracajaca modul liczby zespolonej
     Liczba operator~(void)const; // metoda tworzaca sprzezenie liczby zespolonej
     Liczba operator+(const Liczba & l)const; // metoda dodawania dwoch liczb zespolonych
     Liczba operator-(const Liczba & l)const; // metoda odejmowania dwoch liczb zespolonych
