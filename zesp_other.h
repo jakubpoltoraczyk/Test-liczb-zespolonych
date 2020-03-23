@@ -17,7 +17,7 @@ public:
     void dodaj_suma(){++suma;} // metoda aktualizujaca liczbe wszystkich pytan
     const int & get_pop()const{return pop;} // metoda zwracajaca liczbe poprawnych odpowiedzi
     const int & get_suma()const{return suma;} // metoda zwracajaca liczbe wszystkich pytan
-    const int get_zle()const{return suma-pop;} // metoda zwracajaca liczbe niepoprawnych odpowiedzi
+    int get_zle()const{return suma-pop;} // metoda zwracajaca liczbe niepoprawnych odpowiedzi
     double get_procent()const{return (double(pop)/double(suma))*100;} // metoda zwracajaca procentowa poprawnosc odpowiedzi
 };  
 

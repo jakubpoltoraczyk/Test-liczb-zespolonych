@@ -32,7 +32,13 @@ Liczba Liczba::operator*(const Liczba & l)const
 Liczba Liczba::operator/(const Liczba & l)const
 {
     Liczba obiekt=*this*~l;
-    obiekt=obiekt/l.get_modul();
+    if(l.get_modul()!=0)
+        obiekt=obiekt/l.get_modul();
+    else
+    {
+        std::cerr << "Proba wykonania niedozwolonej operacji dzielenia przez zero - zamykam program\n";
+        exit(0);
+    }
     return obiekt; //zwrocenie nowego obiektu
 }
 
