@@ -21,6 +21,7 @@ public:
     Liczba operator/(const Liczba & l)const; // metoda dzielenia dwoch liczb zespolonych
     Liczba operator/(const double & n)const; // metoda dzielenia liczbe zespolonej przez liczby typu double
     bool operator==(const Liczba & l)const; // metoda porownania rownosci dwoch liczb zespolonych
+    bool operator!=(const Liczba & l)const; // metoda sprawdzania roznosci dwoch liczb zespolonych
 };
 
 /* Funkcje bezposrednio zwiazane z klasa Liczba */

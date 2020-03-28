@@ -61,3 +61,58 @@ void lista_bledow(const int & n)
         cerr << "Blad zapisu. Wyrazenie zostalo pominiete" << endl << endl; break; // komunikat
     }
 }
+
+void czysc(std::istream & i)
+{
+    i.clear();
+    i.ignore(10000,'\n');
+}
+
+std::ostream & operator << (std::ostream & o, const Statystyka & stat)
+{
+    using std::endl;
+    o << "Ilosc dobrych odpowiedzi: " << stat.get_pop() << endl;
+    o << "Ilosc blednych odpowiedzi: " << stat.get_zle() << endl; 
+    o << "Wynik procentowy poprawnych odpowiedzi : " << stat.get_procent() << "%" << endl; 
+}
+
+
+Liczba Pytanie::get_answer()const
+{
+    switch(op)
+    {
+        case plus:
+        return zesp_1+zesp_2;
+        case minus:
+        return zesp_1-zesp_2;
+        case mnoz:  
+        return zesp_1*zesp_2;
+        case dziel:
+        return zesp_1/zesp_2;
+    }
+}
+
+bool Pytanie::check_answer(const Liczba & l)const
+{
+    if(l==get_answer())
+        return true;
+    else
+        return false;
+}
+
+std::ostream & operator << (std::ostream & o, const Pytanie & pyt)
+{
+    o << pyt.get_zesp_1() <<  pyt.get_op() << pyt.get_zesp_2();
+    return o;
+} 
+
+std::istream & operator >> (std::istream & i, Pytanie & pyt)
+{
+    Liczba l1,l2;
+    Operator op;
+    i >> l1 >> op >> l2;
+    i.get();
+    pyt=Pytanie(l1,l2,op);
+    return i;
+}
+

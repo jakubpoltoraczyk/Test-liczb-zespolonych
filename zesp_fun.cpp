@@ -57,6 +57,14 @@ bool Liczba::operator==(const Liczba & l)const
         return false; // zwrocenie falszu jesli rozne
 }
 
+bool Liczba::operator!=(const Liczba &l)const
+{
+    if(real!=l.real||img!=l.img) // porownanie roznosci obu skladowych ( co najmniej jedna musi byc rozna )
+        return true; // zwrocenie prawdy jesli ktorekolwiek sa rozne
+    else
+        return false; // zwrocenie falszu jesli obie sa rowne
+}
+
 /* Metoda przeciazajaca operator << dla liczby zespolonej */
 std::ostream & operator<<(std::ostream & o,const Liczba & l)
 {
