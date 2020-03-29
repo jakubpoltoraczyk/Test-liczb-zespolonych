@@ -10,7 +10,8 @@ private: // prywatne dwie skladowe: czesc rzeczywista i czesc urojona
     double real;
     double img;
 public:
-    Liczba(const double & r=0.0, const double & i=0.0): real(r), img(i) {} // konstruktor przyjumjacy czesc rzeczywista i zespolona
+    Liczba(): real(0.0), img(0.0) {} // konstruktor domyslny ustawiajacy czesc rzeczywista i zespolona na zero
+    Liczba(const double & r, const double & i): real(r), img(i) {} // konstruktor przyjumjacy czesc rzeczywista i zespolona
     const double & get_real(void)const{return real;} // metoda zwracajaca czesc rzeczywista
     const double & get_img(void)const{return img;} // metoda zwracajaca czesc urojona
     double get_modul()const{return real*real+img*img;} // metoda zwracajaca modul liczby zespolonej

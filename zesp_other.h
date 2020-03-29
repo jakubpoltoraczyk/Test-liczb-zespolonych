@@ -13,10 +13,10 @@ enum Operator {plus,minus,dziel,mnoz};
 std::ostream & operator << (std::ostream & o, const Operator & op);
 std::istream & operator >> (std::istream & i, Operator & op);
 
-/* Funkcje sprawdzajace poprawnosc argumentow wywolania programu oraz poprawnosc pliku */
+/* Funkcje odpowiedzialne za obsluge pliku oraz programu*/
 void sprawdzenie_argumentow(const int &, char*[], std::ifstream &); // sprawdzenie poprawnosci argumentow wywolania programu
 void lista_bledow(const int &); // wyswietlenie komunikatu o bledzie programu oraz ewentualne jego zamkniecie
-void czysc(std::istream & i);
+void czysc(std::istream & i); // czyszczenie dowolnego strumienia 
 
 /* Deklaracja klasy dla statystyk w programie */
 class Statystyka
@@ -34,23 +34,27 @@ public:
     double get_procent()const{return (double(pop)/double(suma))*100;} // metoda zwracajaca procentowa poprawnosc odpowiedzi
 };
 
-std::ostream & operator << (std::ostream & o, const Statystyka & stat);
+/* Funkcje zwiazane bezposrednio z klasa Statystyka */
+std::ostream & operator << (std::ostream & o, const Statystyka & stat); // przeciazenie operatora << dla klasy Statystyka
 
+/*Deklaracja klasy dla wyrazen w programie */
 class Pytanie
 {
 private:
-    Liczba zesp_1, zesp_2;
-    Operator op;
+    Liczba zesp_1, zesp_2; // dwie liczby skladajace sie na pelne wyrazenie
+    Operator op; // rodzaj znaku operacji
 public:
-    Pytanie(const Liczba & z_1=Liczba(), const Liczba & z_2=Liczba(), const Operator & o_p=plus): zesp_1(z_1), zesp_2(z_2), op(o_p) {}
-    const Liczba & get_zesp_1()const{return zesp_1;}
-    const Liczba & get_zesp_2()const{return zesp_2;}
-    const Operator & get_op()const{return op;}
-    Liczba get_answer()const;
-    bool check_answer(const Liczba & l)const;
+    Pytanie(): zesp_1(Liczba()), zesp_2(Liczba()), op(plus) {} // konstruktor domyslny wykorzystujacy domyslne konstruktory klasy Liczba
+    Pytanie(const Liczba & z_1, const Liczba & z_2, const Operator & o_p): zesp_1(z_1), zesp_2(z_2), op(o_p) {} // konstruktor z trzema konkretnymi argumentami, tworzacy pelne poprawne wyrazenie
+    const Liczba & get_zesp_1()const{return zesp_1;} // zwrocenie pierwszego skladnika wyrazenia
+    const Liczba & get_zesp_2()const{return zesp_2;} // zwrocenie drugiego skladnika wyrazenia
+    const Operator & get_op()const{return op;} // zwrocenie znaku rodzaju operacji
+    Liczba get_answer()const; // zwrocenie poprawnej odpowiedzi wyrazenia
+    bool check_answer(const Liczba & l)const; // sprawdzenie odpowiedzi z podana w argumencie
 };
 
-std::ostream & operator << (std::ostream & o, const Pytanie & pyt);
-std::istream & operator >> (std::istream & i, Pytanie & pyt);
+/* Funkcje bezposrednio zwiazane z klasa Pytanie */
+std::ostream & operator << (std::ostream & o, const Pytanie & pyt); // przeciazenie operatora << dla klasy Pytanie
+std::istream & operator >> (std::istream & i, Pytanie & pyt); // przeciazenia operatora >> dla klasy Pytanie
 
 #endif // ZESP_OTHER_H

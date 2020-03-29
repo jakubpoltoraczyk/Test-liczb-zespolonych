@@ -51,7 +51,8 @@ Liczba Liczba::operator/(const double & n)const
 /* Metoda porownujaca ze soba rownosc dwoch liczb zespolone */
 bool Liczba::operator==(const Liczba & l)const
 {
-    if(real==l.real&&img==l.img) // porownanie obu skladowych(czy sa rowne)
+    double min = 0.00000001; // okreslenie dokladnosci porownania ze wzgledu na brak precyzji w dzialaniach dla liczb zmiennoprzecinkowych
+    if(std::abs(real-l.real)<min&&std::abs(img-l.img)<min) // porownanie obu skladowych(czy sa rowne)
         return true; // zwrocenie prawdy jesli rowne
     else
         return false; // zwrocenie falszu jesli rozne
@@ -59,10 +60,7 @@ bool Liczba::operator==(const Liczba & l)const
 
 bool Liczba::operator!=(const Liczba &l)const
 {
-    if(real!=l.real||img!=l.img) // porownanie roznosci obu skladowych ( co najmniej jedna musi byc rozna )
-        return true; // zwrocenie prawdy jesli ktorekolwiek sa rozne
-    else
-        return false; // zwrocenie falszu jesli obie sa rowne
+    return !(*this==l); // wykorzystanie operatora == do sprawdzenia czy sa rozne
 }
 
 /* Metoda przeciazajaca operator << dla liczby zespolonej */

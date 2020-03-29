@@ -16,29 +16,29 @@ int main(int argc, char *argv[])
     sprawdzenie_argumentow(argc,argv,plik); // sprawdzenie poprawnosci argumentow wywolania programu oraz poprawnosci pliku
     while (plik.peek()!=EOF) // jesli nie wykryto znaku konca pliku
     {
-        plik >> wyrazenie;
+        plik >> wyrazenie; // pobranie z pliku pelnego wyrazenia
         if(plik.good()) // jesli nie wykryto flagi bledu
         {
-            cout << ":? Podaj wynik operacji: " << wyrazenie << endl << "   Twoja odpowiedz: ";
-            cin >> answer;
-            for(int n=0;cin.fail()&&n<2;++n)
+            cout << ":? Podaj wynik operacji: " << wyrazenie << endl << "   Twoja odpowiedz: "; // wyswietlenie wyrazenia
+            cin >> answer; // pobranie odpowiedzi od uzytkownika
+            for(int n=0;cin.fail()&&n<2;++n) // jesli blad zapisu odpowiedzi mozliwosc jej dwukrotnej poprawy
             {
                 czysc(cin);
                 cout << "   Blad zapisu - podaj jeszcze raz: ";
                 cin >> answer;
             }
-            if(cin.good()&&wyrazenie.check_answer(answer))
+            if(cin.good()&&wyrazenie.check_answer(answer)) // jesli nie bylo trzykrotnego bledu zapisu i odpowiedz jest poprawna
             {
                 cout << ":) Poprawna odpowiedz" << endl << endl;
-                dane.dodaj_pop();
+                dane.dodaj_pop(); // aktualizacja poprawnych odpowiedzi
             }
-            else
+            else // jesli trzykrotny blad zapisu lub niepoprawna odpowiedz
             {
                 cout << ":( Bledna odpowiedz" << endl;
                 cout << "   Poprawna to: " << wyrazenie.get_answer() << endl << endl;
-                if(cin.fail())czysc(cin);
+                if(cin.fail())czysc(cin); // zapobiegawczw wyczyszczenie strumienia
             }
-            dane.dodaj_suma();
+            dane.dodaj_suma(); // zaktualizowanie liczby wszystkich pytan
         }
         else // jesli wykryto flage bledu
         {

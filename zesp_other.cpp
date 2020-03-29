@@ -3,8 +3,17 @@
 /* Funkcja przeciazajaca operator << dla typu wyliczeniowego Operator */
 std::ostream & operator << (std::ostream & o, const Operator & op)
 {
-    const char tab[]={'+','-','/','*'}; // tablica poszczegolnych znakow
-    o << tab[op];
+    switch(op) // ropoznanie typu operacji
+    {
+        case plus:
+        o << "+"; break;
+        case minus:
+        o << "-"; break;
+        case mnoz:
+        o << "*"; break;
+        case dziel:
+        o << "/"; break;
+    }
     return o; // zwrocenie obiektu klasy ostream
 }
 
@@ -62,24 +71,27 @@ void lista_bledow(const int & n)
     }
 }
 
+/* Funkcja czyszczaca dowolny strumien */
 void czysc(std::istream & i)
 {
     i.clear();
     i.ignore(10000,'\n');
 }
 
+/* Funkcja przeciazajaca operator << dla klasy Statystyka */
 std::ostream & operator << (std::ostream & o, const Statystyka & stat)
 {
     using std::endl;
     o << "Ilosc dobrych odpowiedzi: " << stat.get_pop() << endl;
     o << "Ilosc blednych odpowiedzi: " << stat.get_zle() << endl; 
-    o << "Wynik procentowy poprawnych odpowiedzi : " << stat.get_procent() << "%" << endl; 
+    o << "Wynik procentowy poprawnych odpowiedzi : " << stat.get_procent() << "%" << endl;
+    return o; // zwrocenie obiektu klasy ostream 
 }
 
-
+/* Funkcja zwracajaca poprawna odpowiedz dla klasy Pytanie */
 Liczba Pytanie::get_answer()const
 {
-    switch(op)
+    switch(op) // rozpoznanie znaku operacji a nastepnie wykonanie odpowiedniej operacji
     {
         case plus:
         return zesp_1+zesp_2;
@@ -92,27 +104,30 @@ Liczba Pytanie::get_answer()const
     }
 }
 
+/* Funkcja sprawdzajaca poprawnosc odpowiedzi z odpowiedzia podana w argumencie */
 bool Pytanie::check_answer(const Liczba & l)const
 {
     if(l==get_answer())
-        return true;
+        return true; // jesli rowne zwrocenie prawdy
     else
-        return false;
+        return false; // jesli rozne zwrocenie falszu
 }
 
+/* Przeciazenie operatora << dla klasy Pytanie */
 std::ostream & operator << (std::ostream & o, const Pytanie & pyt)
 {
     o << pyt.get_zesp_1() <<  pyt.get_op() << pyt.get_zesp_2();
-    return o;
+    return o; // zwrocenie obiektu klasy ostream 
 } 
 
+/* Przeciazenie operatora >> dla klasy Pytanie */
 std::istream & operator >> (std::istream & i, Pytanie & pyt)
 {
-    Liczba l1,l2;
-    Operator op;
-    i >> l1 >> op >> l2;
-    i.get();
-    pyt=Pytanie(l1,l2,op);
-    return i;
+    Liczba l1,l2; // dwa tymczasowe obiekty klasy Liczba
+    Operator op; // tymczasowy obiekt typu wyliczeniowego Operator
+    i >> l1 >> op >> l2; // wykorzystanie przeciazen operatorow dla poszczegolnych obiektow
+    i.get(); // pobranie znaku nowej linii
+    pyt=Pytanie(l1,l2,op); // zaktualizowanie obiektu Pytanie za pomoca jego konstruktora
+    return i; // zwrocenie obiektu klasy istream
 }
 
