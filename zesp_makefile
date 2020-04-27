@@ -1,0 +1,20 @@
+#Makefile dla programu: Test-liczb-zespolonych
+
+CPPFLAGS = -Wall -pedantic -std=c++17
+
+all: test_zesp clean
+
+test_zesp: zesp_main.o zesp_fun.o zesp_other.o
+	g++ ${CPPFLAGS} -o test_zesp zesp_main.o zesp_fun.o zesp_other.o
+
+zesp_main.o: zesp_main.cpp zesp_fun.h zesp_other.h
+	g++ ${CPPFLAGS} -c zesp_main.cpp
+
+zesp_fun.o: zesp_fun.cpp zesp_fun.h
+	g++ ${CPPFLAGS} -c zesp_fun.cpp
+
+zesp_other.o: zesp_other.cpp zesp_other.h
+	g++ ${CPPFLAGS} -c zesp_other.cpp 
+
+clean:
+	@rm -f *.o *~
